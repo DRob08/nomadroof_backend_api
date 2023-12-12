@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_12_013503) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_12_210833) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_013503) do
     t.string "confirmation_token"
     t.datetime "confirmed_at", precision: nil
     t.integer "role", default: 0
+    t.string "whatsapp_number"
+    t.string "languages_spoken"
+    t.text "about_me"
+    t.date "dob"
+    t.string "instagram_handle"
+    t.string "twitter_handle"
+    t.string "linkedin_handle"
   end
 
 end
