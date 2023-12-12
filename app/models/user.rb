@@ -1,5 +1,7 @@
 class User < ApplicationRecord
     has_secure_password
+
+    enum role: { student: 0, admin: 1, host: 2 }
   
     validates_presence_of :email
     validates_uniqueness_of :email
