@@ -10,9 +10,38 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_12_210833) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_15_202249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "properties", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.text "description"
+    t.decimal "latitude"
+    t.decimal "longitude"
+    t.text "features_and_amenities"
+    t.integer "max_guests"
+    t.boolean "availability"
+    t.decimal "monthly_price"
+    t.decimal "weekly_price"
+    t.decimal "daily_price"
+    t.string "status"
+    t.date "booked_start_date"
+    t.date "booked_end_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "cat_property_id"
+    t.index ["cat_property_id"], name: "index_properties_on_cat_property_id"
+    t.index ["user_id"], name: "index_properties_on_user_id"
+  end
+
+  create_table "property_categories", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_property_categories_on_name", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -34,4 +63,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_12_210833) do
     t.string "linkedin_handle"
   end
 
+  add_foreign_key "properties", "property_categories", column: "cat_property_id"
+  add_foreign_key "properties", "users"
 end

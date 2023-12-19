@@ -11,6 +11,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :property_categories, only: [:index]
+
+  resources :properties, only: [:create]
+
   # Add the confirmation route
   post 'confirm_email/:token', to: 'confirmations#confirm_email'
 
