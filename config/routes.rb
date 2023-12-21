@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   end
 
   resources :property_categories, only: [:index]
-
   resources :properties, only: [:create]
 
   # Add the confirmation route
