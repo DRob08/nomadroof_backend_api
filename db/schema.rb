@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_15_202249) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,7 +32,22 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_15_202249) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "cat_property_id"
+    t.decimal "extra_price_per_guest", default: "0.0"
+    t.integer "size", default: 0
+    t.integer "bedrooms", default: 0
+    t.integer "bathrooms", default: 0
+    t.integer "rooms", default: 0
+    t.decimal "city_fee", default: "0.0"
+    t.decimal "cleaning_fee", default: "0.0"
+    t.boolean "verified", default: false
+    t.string "country"
+    t.string "city"
+    t.text "about_neighborhood"
+    t.integer "min_booking_months", default: 0
+    t.time "check_in_hour", default: "2000-01-01 12:00:00"
+    t.time "check_out_hour", default: "2000-01-01 12:00:00"
     t.index ["cat_property_id"], name: "index_properties_on_cat_property_id"
+    t.index ["name"], name: "index_properties_on_name", unique: true
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
