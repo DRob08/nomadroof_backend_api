@@ -14,6 +14,7 @@ class CreateProperties < ActiveRecord::Migration[7.0]
       t.string :status
       t.date :booked_start_date
       t.date :booked_end_date
+      t.text :features_and_amenities, array: true, default: []
 
       t.timestamps
     end

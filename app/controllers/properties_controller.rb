@@ -68,7 +68,7 @@ class PropertiesController < ApplicationController
           :status, :booked_start_date, :booked_end_date, :cat_property_id,
           :size, :bedrooms, :bathrooms, :rooms, :city_fee,
           :cleaning_fee, :min_booking_months, :extra_price_per_guest,
-          :verified, :country, :city,
+          :verified, :country, :city, :property_address, :zip_code,
           features_and_amenities: [] # Permit array of features_and_amenities
         ).merge(user_id: @current_user.id)
       end

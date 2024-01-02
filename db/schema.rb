@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_31_033539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,7 +20,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
     t.text "description"
     t.decimal "latitude"
     t.decimal "longitude"
-    t.text "features_and_amenities"
     t.integer "max_guests"
     t.boolean "availability"
     t.decimal "monthly_price"
@@ -29,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
     t.string "status"
     t.date "booked_start_date"
     t.date "booked_end_date"
+    t.text "features_and_amenities", default: [], array: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "cat_property_id"
@@ -46,6 +46,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
     t.integer "min_booking_months", default: 0
     t.time "check_in_hour", default: "2000-01-01 12:00:00"
     t.time "check_out_hour", default: "2000-01-01 12:00:00"
+    t.string "property_address"
+    t.string "zip_code"
+    t.boolean "published", default: false
     t.index ["cat_property_id"], name: "index_properties_on_cat_property_id"
     t.index ["name"], name: "index_properties_on_name", unique: true
     t.index ["user_id"], name: "index_properties_on_user_id"
@@ -56,6 +59,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_property_categories_on_name", unique: true
+  end
+
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "property_id", null: false
+    t.integer "bedroom_number", null: false
+    t.string "room_type"
+    t.integer "occupancy"
+    t.decimal "room_size"
+    t.boolean "ensuite_bathroom"
+    t.text "description"
+    t.boolean "accessible"
+    t.decimal "nightly_price"
+    t.decimal "monthly_price"
+    t.json "images"
+    t.boolean "available", default: true
+    t.boolean "booked", default: false
+    t.date "check_in_date"
+    t.date "check_out_date"
+    t.integer "bed_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id", "bedroom_number"], name: "index_rooms_on_property_id_and_bedroom_number", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,4 +105,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_21_225615) do
 
   add_foreign_key "properties", "property_categories", column: "cat_property_id"
   add_foreign_key "properties", "users"
+  add_foreign_key "rooms", "properties"
 end
