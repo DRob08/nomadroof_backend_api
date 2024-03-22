@@ -11,7 +11,7 @@ class User < ApplicationRecord
       # Add these fields for profile editing
     validates_presence_of :first_name, :last_name
     validates :whatsapp_number, presence: true, if: -> { whatsapp_number_changed? }
-    validates :languages_spoken, presence: true, if: -> { languages_spoken_changed? }
+    # validates :languages_spoken, presence: true, if: -> { languages_spoken_changed? }
     validates :about_me, presence: true, if: -> { about_me_changed? }
     validates :dob, presence: true, if: -> { dob_changed? }
     validates :instagram_handle, presence: true, if: -> { instagram_handle_changed? }
