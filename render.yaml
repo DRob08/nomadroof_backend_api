@@ -1,6 +1,6 @@
 databases:
-  - name: nomadroof-back-end-api
-    databaseName: nomadroof-back-end-db
+  - name: nomadroof_backend_api_db
+    databaseName: nomadroof_backend_api_db
     user: root
     plan: free
 
