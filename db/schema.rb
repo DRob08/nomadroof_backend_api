@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_27_142727) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_31_033539) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,28 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_27_142727) do
     t.index ["name"], name: "index_property_categories_on_name", unique: true
   end
 
+  create_table "rooms", force: :cascade do |t|
+    t.bigint "property_id", null: false
+    t.integer "bedroom_number", null: false
+    t.string "room_type"
+    t.integer "occupancy"
+    t.decimal "room_size"
+    t.boolean "ensuite_bathroom"
+    t.text "description"
+    t.boolean "accessible"
+    t.decimal "nightly_price"
+    t.decimal "monthly_price"
+    t.json "images"
+    t.boolean "available", default: true
+    t.boolean "booked", default: false
+    t.date "check_in_date"
+    t.date "check_out_date"
+    t.integer "bed_type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["property_id", "bedroom_number"], name: "index_rooms_on_property_id_and_bedroom_number", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -83,4 +105,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_27_142727) do
 
   add_foreign_key "properties", "property_categories", column: "cat_property_id"
   add_foreign_key "properties", "users"
+  add_foreign_key "rooms", "properties"
 end
